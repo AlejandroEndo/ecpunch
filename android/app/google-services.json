@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "628171140092",
+    "firebase_url": "https://ecpunch-26a8a.firebaseio.com",
+    "project_id": "ecpunch-26a8a",
+    "storage_bucket": "ecpunch-26a8a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628171140092:android:dafc1b6dc17fca016ba079",
+        "android_client_info": {
+          "package_name": "com.bees2biz.ecpunch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628171140092-5ic9ok75cfk17egee25uum9fkl74aki4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bees2biz.ecpunch",
+            "certificate_hash": "9cabe033a3c8b9f3d831afc30453275ce2ebd433"
+          }
+        },
+        {
+          "client_id": "628171140092-mh3ev1c6hisla5n2cpl2rkuvqhoqvbtb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA78ersvTRWXmUrWYALgZvwGXMPiwaMS8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "628171140092-mh3ev1c6hisla5n2cpl2rkuvqhoqvbtb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

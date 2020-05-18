@@ -1,5 +1,5 @@
 name: ecpunch
-description: A new Flutter project.
+description: AI and BI technology.
 
 publish_to: "none"
 version: 1.0.0+1
@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^0.1.3
+  font_awesome_flutter: ^8.8.1
+  provider: ^4.1.2
 
 dev_dependencies:
   flutter_test:
@@ -19,3 +21,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/

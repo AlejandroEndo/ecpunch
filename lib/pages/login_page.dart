@@ -1,7 +1,9 @@
+import 'package:ecpunch/providers/login_state.dart';
 import 'package:ecpunch/widgets/login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ecpunch/constants.dart' as Constants;
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -9,6 +11,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  Provider loginState;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,38 +52,48 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             color: Colors.white,
             padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 15.0),
-            child: Column(
-              children: <Widget>[
-                LoginButton(
-                  type: 'google',
-                  icon: FontAwesomeIcons.google,
-                  onPressed: () {},
-                ),
-                LoginButton(
-                  type: 'facebook',
-                  icon: FontAwesomeIcons.facebook,
-                  onPressed: () {},
-                ),
-                LoginButton(
-                  type: 'phone',
-                  icon: FontAwesomeIcons.phone,
-                  onPressed: () {},
-                ),
-                LoginButton(
-                  type: 'login',
-                  onPressed: () {},
-                ),
-                FlatButton(
-                  padding: EdgeInsets.all(0.0),
-                  child: Text(Constants.FORGOT_PASSWORD),
-                  onPressed: () {},
-                ),
-                FlatButton(
-                  padding: EdgeInsets.all(0.0),
-                  child: Text(Constants.REGISTER),
-                  onPressed: () {},
-                ),
-              ],
+            child: Consumer<LoginState>(
+              builder: (BuildContext context, LoginState value, Widget child) {
+                if (value.isLoading)
+                  return CircularProgressIndicator();
+                else
+                  return child;
+              },
+              child: Column(
+                children: <Widget>[
+                  LoginButton(
+                    type: 'google',
+                    icon: FontAwesomeIcons.google,
+                    onPressed: () {
+                      context.read<LoginState>().logInGoogle();
+                    },
+                  ),
+                  LoginButton(
+                    type: 'facebook',
+                    icon: FontAwesomeIcons.facebook,
+                    onPressed: () {},
+                  ),
+                  LoginButton(
+                    type: 'phone',
+                    icon: FontAwesomeIcons.phone,
+                    onPressed: () {},
+                  ),
+                  LoginButton(
+                    type: 'login',
+                    onPressed: () {},
+                  ),
+                  FlatButton(
+                    padding: EdgeInsets.all(0.0),
+                    child: Text(Constants.FORGOT_PASSWORD),
+                    onPressed: () {},
+                  ),
+                  FlatButton(
+                    padding: EdgeInsets.all(0.0),
+                    child: Text(Constants.REGISTER),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
             ),
           ),
         ],

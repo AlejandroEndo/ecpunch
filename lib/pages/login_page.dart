@@ -1,4 +1,5 @@
 import 'package:ecpunch/providers/login_state.dart';
+import 'package:ecpunch/widgets/forgot_password_button.dart';
 import 'package:ecpunch/widgets/login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       image: AssetImage(
                         'assets/images/punchImg.jpg',
                       ),
@@ -54,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
             padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 15.0),
             child: Consumer<LoginState>(
               builder: (BuildContext context, LoginState value, Widget child) {
-                if (value.isLoading)
+                if (value.isLoading())
                   return CircularProgressIndicator();
                 else
                   return child;
@@ -80,16 +81,19 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   LoginButton(
                     type: 'login',
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/customLogin');
+                    },
+                  ),
+                  ForgotPasswordButton(
                     onPressed: () {},
                   ),
                   FlatButton(
                     padding: EdgeInsets.all(0.0),
-                    child: Text(Constants.FORGOT_PASSWORD),
-                    onPressed: () {},
-                  ),
-                  FlatButton(
-                    padding: EdgeInsets.all(0.0),
-                    child: Text(Constants.REGISTER),
+                    child: Text(
+                      Constants.REGISTER,
+                      style: TextStyle(color: Constants.COLORS['dark_gray']),
+                    ),
                     onPressed: () {},
                   ),
                 ],

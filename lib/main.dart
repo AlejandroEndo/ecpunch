@@ -1,3 +1,4 @@
+import 'package:ecpunch/pages/custom_login_page.dart';
 import 'package:ecpunch/pages/home_page.dart';
 import 'package:ecpunch/pages/login_page.dart';
 import 'package:ecpunch/providers/login_state.dart';
@@ -25,11 +26,12 @@ class MyApp extends StatelessWidget {
         // home: LoginPage(),
         routes: {
           '/': (BuildContext context) {
-            if (context.watch<LoginState>().isLoggedIn)
+            if (context.watch<LoginState>().isLoggedIn())
               return HomePage();
             else
               return LoginPage();
-          }
+          },
+          '/customLogin': (BuildContext context) => CustomLoginPage(),
         },
       ),
     );

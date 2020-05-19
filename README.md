@@ -8,13 +8,13 @@ La prueba consiste en integrar los diseños de pantallas de una aplicación junt
 
  - [ ] Archivo .apk de la aplicación. 
  - [x] Enlace a Github del proyecto.
- - [ ] Acceso al proyecto en Firebase.
+ - [x] Acceso al proyecto en Firebase.
 
 ### CONDICIONES DE ENTREGA
 
  - [ ] Flujo de Inicio de sesión completo con las pantallas entregadas.
  - [ ] **Autentificaciones funcionales:** Login manual, conexión con Google, conexión con Facebook, conexión con número celular.
- - [ ] Registro de nuevo usuario funcional.
+ - [x] Registro de nuevo usuario funcional.
  - [x] El código debe mostrar diferentes commits de progreso, es decir, se valorará un desarrollo paso a paso y se puede descartar si se sube el proyecto en un solo commit.
  - [x] No se aceptan otros formatos de entrega de proyecto diferentes a los especificados.
 

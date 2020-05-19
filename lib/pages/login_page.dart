@@ -2,6 +2,7 @@ import 'package:ecpunch/pages/custom_login_page.dart';
 import 'package:ecpunch/providers/login_state.dart';
 import 'package:ecpunch/widgets/forgot_password_button.dart';
 import 'package:ecpunch/widgets/login_button.dart';
+import 'package:ecpunch/widgets/principal_header.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ecpunch/constants.dart' as Constants;
@@ -19,38 +20,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Expanded(
-            child: Stack(
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage(
-                        'assets/images/punchImg.jpg',
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: FractionalOffset.bottomLeft,
-                      end: FractionalOffset.topRight,
-                      colors: [
-                        Color(0xdd82ac38),
-                        Color(0xbb2c81bf),
-                      ],
-                      stops: [0.0, 1.0],
-                    ),
-                  ),
-                ),
-                Center(
-                  child: Image.asset('assets/images/logo-blanco-AI-BI.png'),
-                ),
-              ],
-            ),
-          ),
+          PrincipalHeader(),
           Container(
             color: Colors.white,
             padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 15.0),
@@ -78,20 +48,14 @@ class _LoginPageState extends State<LoginPage> {
                   LoginButton(
                     type: 'phone',
                     icon: FontAwesomeIcons.phone,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/phoneLogin');
+                    },
                   ),
                   LoginButton(
                     type: 'login',
                     onPressed: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_) => CustomLoginPage()));
-                      //Navigator.of(context).pushNamed('/customLogin');
-                      // Navigator.of(context).push();
-                      // MaterialPageRoute(
-                      //   builder: (_) => CustomLoginPage(
-                      //     initialIndex: 1,
-                      //   ),
-                      // ),
+                      Navigator.of(context).pushNamed('/customLogin');
                     },
                   ),
                   ForgotPasswordButton(

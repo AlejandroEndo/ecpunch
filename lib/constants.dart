@@ -13,6 +13,7 @@ const Map<String, String> LOGIN = {
   'login': 'Log In user and pass',
   'signin': 'Sign in',
   'signup': 'Sign up',
+  'sms': 'Send SMS',
 };
 
 // Custom LOGIN / SIGNUP
@@ -22,8 +23,12 @@ const String EMAIL_HINT = 'Ingresa tu email o celular';
 const String PASSWORD_HINT = 'Enter your password';
 const String SIGNUP_TITLE = 'Create an account';
 const String SIGNUP_SUBTITLE = 'Join ecpunch!';
+const String PHONE_LOGIN_TITLE =
+    'Ingresa el numero de celular con el cual te registraste en ecpunch. te llegara un SMS con el codigo de aprobacion';
 const String INVALID_EMAIL_FIELD = 'Por favor introduzca un Correo valido.';
-const String INVALID_PASSWORD_FIELD = 'Por favor introduzca una Contraseña valida.';
+const String INVALID_PASSWORD_FIELD =
+    'Por favor introduzca una Contraseña valida.';
+const String PHONE_HINT = 'Enter your phone number';
 
 const Map<String, String> HEADERS = {"Content-Type": "application/json"};
 
@@ -35,6 +40,7 @@ const Map<String, Color> COLORS = {
   'login': Color(0xfff15b22),
   'signin': Color(0xff003fc5),
   'signup': Color(0xff003fc5),
+  'sms': Color(0xffa5bf37),
   'blue': Color(0xff536b8d),
   'soft_blue': Color(0xfff6f7f9),
   'soft_gray': Color(0xffcbcfd7),

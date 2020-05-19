@@ -110,15 +110,9 @@ class _CustomSignUpContentState extends State<CustomSignUpContent> {
                   onPressed: () async {
                     if (formKey.currentState.validate()) {
                       formKey.currentState.save();
-                      Map<String, dynamic> result = await context
+                      context
                           .read<LoginState>()
-                          .signUp(email, password);
-                      if (result['error']) {
-                        Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text(result['message']),
-                      ));
-                      } else
-                        Navigator.of(context).pop();
+                          .signUp(email, password, context);
                     }
                   },
                   type: 'signup',

@@ -99,15 +99,9 @@ class _CustomLoginContentState extends State<CustomLoginContent> {
                   onPressed: () async {
                     if (formKey.currentState.validate()) {
                       formKey.currentState.save();
-                      Map<String, dynamic> result = await context
+                      context
                           .read<LoginState>()
-                          .logInEmail(email, password);
-                      if (result['error']) {
-                        Scaffold.of(context).showSnackBar(SnackBar(
-                          content: Text(result['message']),
-                        ));
-                      } else
-                        Navigator.of(context).pop();
+                          .logInEmail(email, password, context);
                     }
                   },
                   type: 'signin',

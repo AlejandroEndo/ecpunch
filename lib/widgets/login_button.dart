@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ecpunch/constants.dart' as Constants;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class LoginButton extends StatelessWidget {
+class LoginButton extends StatefulWidget {
   String type;
   IconData icon;
   Function onPressed;
@@ -12,15 +12,21 @@ class LoginButton extends StatelessWidget {
     @required this.onPressed,
     this.icon,
   }) : super(key: key);
+
+  @override
+  _LoginButtonState createState() => _LoginButtonState();
+}
+
+class _LoginButtonState extends State<LoginButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 7.0),
       child: RaisedButton(
         elevation: 0.0,
-        onPressed: onPressed,
+        onPressed: widget.onPressed,
         padding: EdgeInsets.symmetric(vertical: 15.0),
-        color: Constants.COLORS[type],
+        color: Constants.COLORS[widget.type],
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
@@ -28,10 +34,10 @@ class LoginButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            icon == null ? Container() : Icon(icon, color: Colors.white),
+            widget.icon == null ? Container() : Icon(widget.icon, color: Colors.white),
             SizedBox(width: 15.0),
             Text(
-              Constants.LOGIN[type],
+              Constants.LOGIN[widget.type],
               style: TextStyle(color: Colors.white),
             ),
           ],

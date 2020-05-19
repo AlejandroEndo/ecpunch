@@ -24,18 +24,23 @@ class LoginState with ChangeNotifier {
 
   void logInEmail(String email, String password) async {
     _loading = true;
-    _user = await _signInWithEmailAndPassword(email, password);
+    Map<String, dynamic> result =
+        await _signInWithEmailAndPassword(email, password);
+    if (!result['error']) _user = result['user'];
     _loading = false;
     _user != null ? _loggedIn = true : _loggedIn = false;
     notifyListeners();
   }
 
-  void signUp(String email, String password) async {
+  Future<Map<String, dynamic>> signUp(String email, String password) async {
     _loading = true;
-    _user = await _registerWithEmailAndPassword(email, password);
+    Map<String, dynamic> result =
+        await _registerWithEmailAndPassword(email, password);
+    if (!result['error']) _user = result['user'];
     _loading = false;
     _user != null ? _loggedIn = true : _loggedIn = false;
     notifyListeners();
+    return result;
   }
 
   void logout() {
@@ -60,27 +65,27 @@ class LoginState with ChangeNotifier {
     return user;
   }
 
-  Future _signInWithEmailAndPassword(String email, String password) async {
+  Future<Map<String, dynamic>> _signInWithEmailAndPassword(
+      String email, String password) async {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      return user;
+      return {'user': user, 'error': false};
     } catch (error) {
-      print(error.toString());
-      return null;
+      return {'error': true, 'message': error.message};
     }
   }
 
-  Future _registerWithEmailAndPassword(String email, String password) async {
+  Future<Map<String, dynamic>> _registerWithEmailAndPassword(
+      String email, String password) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      return user;
+      return {'user': user, 'error': false};
     } catch (error) {
-      print(error.toString());
-      return null;
+      return {'error': true, 'message': error.message};
     }
   }
 

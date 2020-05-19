@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.network(context.watch<LoginState>().user.photoUrl ?? ''),
+            // Image.network(context.watch<LoginState>().user.photoUrl ?? ''),
             Text(context.watch<LoginState>().user.displayName ?? ''),
             Text(context.watch<LoginState>().user.email ?? ''),
             Text(context.watch<LoginState>().user.phoneNumber ?? ''),

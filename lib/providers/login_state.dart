@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginState with ChangeNotifier {
@@ -9,6 +10,7 @@ class LoginState with ChangeNotifier {
   bool isLoading() => _loading;
 
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FacebookLogin _facebookLogin = FacebookLogin();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   FirebaseUser _user;
@@ -24,12 +26,19 @@ class LoginState with ChangeNotifier {
     _loading = true;
     _user = await _handleGoogleSignIn();
     _loading = false;
-    _user != null ? _loggedIn = true : _loggedIn = false;
+    _updateLogInState(_user);
     notifyListeners();
   }
 
-  void logInEmail(
-      String email, String password, BuildContext _context) async {
+  void logiInFacebook() async {
+    _loading = true;
+    _user = await _handleFacebookSignIn();
+    _loading = false;
+    _updateLogInState(_user);
+    notifyListeners();
+  }
+
+  void logInEmail(String email, String password, BuildContext _context) async {
     _loading = true;
     Map<String, dynamic> result =
         await _signInWithEmailAndPassword(email, password);
@@ -48,8 +57,7 @@ class LoginState with ChangeNotifier {
 
   void logInPhone(String phoneNumber, BuildContext _context) async {}
 
-  void signUp(
-      String email, String password, BuildContext _context) async {
+  void signUp(String email, String password, BuildContext _context) async {
     _loading = true;
     Map<String, dynamic> result =
         await _registerWithEmailAndPassword(email, password);
@@ -89,6 +97,18 @@ class LoginState with ChangeNotifier {
     return user;
   }
 
+  Future<FirebaseUser> _handleFacebookSignIn() async {
+    var result = await _facebookLogin.logIn(['email']);
+    debugPrint(result.status.toString());
+
+    if (result.status == FacebookLoginStatus.loggedIn) {
+      AuthCredential credential = FacebookAuthProvider.getCredential(
+          accessToken: result.accessToken.token);
+      FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
+      return user;
+    }
+    return null;
+  }
 
   Future<Map<String, dynamic>> _signInWithEmailAndPassword(
       String email, String password) async {
@@ -146,9 +166,7 @@ class LoginState with ChangeNotifier {
     FirebaseAuth.instance
         .signInWithCredential(authCredential)
         .then((authResult) {
-      final snackBar =
-          SnackBar(content: Text("Success!!! UUID is: " + authResult.user.uid));
-      Scaffold.of(_context).showSnackBar(snackBar);
+      Navigator.of(_context).pushNamed('/phoneCode');
     });
     notifyListeners();
   }
@@ -161,9 +179,9 @@ class LoginState with ChangeNotifier {
 
   verificationFailed(AuthException authException, BuildContext _context) {
     Scaffold.of(_context).showSnackBar(SnackBar(
-        content: Text("Exception!! message:" + authException.message.toString()),
-      ));
-      notifyListeners();
+      content: Text("Exception!! message:" + authException.message.toString()),
+    ));
+    notifyListeners();
   }
 
   codeAutoRetrievalTimeout(String verificationId) {

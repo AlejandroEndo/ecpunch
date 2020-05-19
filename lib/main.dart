@@ -1,6 +1,7 @@
 import 'package:ecpunch/pages/custom_login_page.dart';
 import 'package:ecpunch/pages/home_page.dart';
 import 'package:ecpunch/pages/login_page.dart';
+import 'package:ecpunch/pages/phone_code_page.dart';
 import 'package:ecpunch/pages/phone_login_page.dart';
 import 'package:ecpunch/providers/login_state.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
           },
           '/customLogin': (BuildContext context) => CustomLoginPage(),
           '/phoneLogin': (BuildContext context) => PhoneLoginPage(),
+          '/phoneCode':(BuildContext context) => PhoneCodePage(),
         },
       ),
     );

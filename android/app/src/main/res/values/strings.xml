@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ecpunch</string>
+    <string name="facebook_app_id">996418970756191</string>
+    <string name="fb_login_protocol_scheme">fb996418970756191</string>
+</resources>

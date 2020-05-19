@@ -29,6 +29,9 @@ const String INVALID_EMAIL_FIELD = 'Por favor introduzca un Correo valido.';
 const String INVALID_PASSWORD_FIELD =
     'Por favor introduzca una Contraseña valida.';
 const String PHONE_HINT = 'Enter your phone number';
+const String PHONE_CODE_TITLE = 'Phone Verification';
+const String PHONE_CODE_SUBTITLE = 'Your phone number';
+const String PHONE_CODE_CONTENT = 'Enter the 6 digit sent to your phone';
 
 const Map<String, String> HEADERS = {"Content-Type": "application/json"};
 

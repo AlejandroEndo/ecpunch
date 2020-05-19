@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SecondaryHeader extends StatefulWidget {
+  Widget child;
+  SecondaryHeader({Key key, this.child}) : super(key: key);
   @override
   _SecondaryHeaderState createState() => _SecondaryHeaderState();
 }
@@ -38,9 +40,16 @@ class _SecondaryHeaderState extends State<SecondaryHeader> {
           Positioned(
             bottom: 30.0,
             left: 30.0,
-            child: Container(
-              width: (MediaQuery.of(context).size.width / 5) * 3,
-              child: Image.asset('assets/images/logo-blanco.png'),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Container(
+                  width: (MediaQuery.of(context).size.width / 5) * 3,
+                  child: Image.asset('assets/images/logo-blanco.png'),
+                ),
+                widget.child != null ? widget.child : Container(),
+              ],
             ),
           ),
         ],

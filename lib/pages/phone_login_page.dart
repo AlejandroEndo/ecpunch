@@ -58,13 +58,6 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
                             keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
                               hintText: Constants.PHONE_HINT,
-                              // prefix: CountryCodePicker(
-                              //   initialSelection: 'CO',
-                              //   favorite: ['+57', 'CO'],
-                              //   onChanged: (CountryCode code) {
-                              //     countryCode = code.dialCode;
-                              //   },
-                              // ),
                             ),
                           ),
                         ),
@@ -74,9 +67,10 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
                     LoginButton(
                       type: 'sms',
                       onPressed: () async {
-                        context
-                            .read<LoginState>()
-                            .verifyPhoneNumber('$countryCode$phone', context);
+                        Navigator.of(context).pushNamed('/phoneCode');
+                        // context
+                        //     .read<LoginState>()
+                        //     .verifyPhoneNumber('$countryCode$phone', context);
                       },
                     ),
                   ],

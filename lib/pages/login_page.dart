@@ -43,7 +43,9 @@ class _LoginPageState extends State<LoginPage> {
                   LoginButton(
                     type: 'facebook',
                     icon: FontAwesomeIcons.facebook,
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<LoginState>().logiInFacebook();
+                    },
                   ),
                   LoginButton(
                     type: 'phone',

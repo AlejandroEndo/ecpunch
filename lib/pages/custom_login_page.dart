@@ -6,6 +6,8 @@ import 'package:ecpunch/constants.dart' as Constants;
 import 'package:ecpunch/providers/login_state.dart';
 
 class CustomLoginPage extends StatefulWidget {
+  final int initialIndex;
+  CustomLoginPage({Key key, this.initialIndex}):super(key:key);
   @override
   _CustomLoginPageState createState() => _CustomLoginPageState();
 }
@@ -54,6 +56,7 @@ class _CustomLoginPageState extends State<CustomLoginPage> {
 
     return DefaultTabController(
       length: 2,
+      initialIndex: widget.initialIndex ?? 0,
       child: Scaffold(
         body: Container(
           decoration: const BoxDecoration(
@@ -64,6 +67,7 @@ class _CustomLoginPageState extends State<CustomLoginPage> {
             children: <Widget>[
               _header,
               TabBar(
+                
                 indicatorColor: Constants.COLORS['facebook'],
                 tabs: <Widget>[
                   Tab(

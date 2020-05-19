@@ -1,3 +1,4 @@
+import 'package:ecpunch/pages/custom_login_page.dart';
 import 'package:ecpunch/providers/login_state.dart';
 import 'package:ecpunch/widgets/forgot_password_button.dart';
 import 'package:ecpunch/widgets/login_button.dart';
@@ -82,7 +83,15 @@ class _LoginPageState extends State<LoginPage> {
                   LoginButton(
                     type: 'login',
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/customLogin');
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_) => CustomLoginPage()));
+                      //Navigator.of(context).pushNamed('/customLogin');
+                      // Navigator.of(context).push();
+                      // MaterialPageRoute(
+                      //   builder: (_) => CustomLoginPage(
+                      //     initialIndex: 1,
+                      //   ),
+                      // ),
                     },
                   ),
                   ForgotPasswordButton(
@@ -94,7 +103,10 @@ class _LoginPageState extends State<LoginPage> {
                       Constants.REGISTER,
                       style: TextStyle(color: Constants.COLORS['dark_gray']),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => CustomLoginPage(initialIndex: 1)));
+                    },
                   ),
                 ],
               ),

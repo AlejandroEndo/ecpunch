@@ -22,7 +22,7 @@ class LoginState with ChangeNotifier {
     notifyListeners();
   }
 
-  void logInEmail(String email, String password) async {
+  Future<Map<String, dynamic>> logInEmail(String email, String password) async {
     _loading = true;
     Map<String, dynamic> result =
         await _signInWithEmailAndPassword(email, password);
@@ -30,6 +30,7 @@ class LoginState with ChangeNotifier {
     _loading = false;
     _user != null ? _loggedIn = true : _loggedIn = false;
     notifyListeners();
+    return result;
   }
 
   Future<Map<String, dynamic>> signUp(String email, String password) async {

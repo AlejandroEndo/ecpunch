@@ -1,7 +1,8 @@
 import 'package:ecpunch/widgets/forgot_password_button.dart';
 import 'package:flutter/material.dart';
 import 'package:ecpunch/constants.dart' as Constants;
-
+import 'package:provider/provider.dart';
+import '../providers/login_state.dart';
 import 'login_button.dart';
 
 class CustomLoginContent extends StatefulWidget {
@@ -10,10 +11,30 @@ class CustomLoginContent extends StatefulWidget {
 }
 
 class _CustomLoginContentState extends State<CustomLoginContent> {
+  final formKey = GlobalKey<FormState>();
+  String email;
+  String password;
   @override
   Widget build(BuildContext context) {
-    Widget _inputDecoration(String hintText) {
+    Widget _inputField(String hintText, bool isEmail) {
       return TextFormField(
+        validator: (String value) {
+          if (value.isEmpty)
+            return isEmail
+                ? Constants.INVALID_EMAIL_FIELD
+                : Constants.INVALID_PASSWORD_FIELD;
+          bool emailValid = RegExp(
+                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+              .hasMatch(value);
+          if (!emailValid && isEmail) return Constants.INVALID_EMAIL_FIELD;
+          return null;
+        },
+        onSaved: (String value) {
+          if (isEmail)
+            email = value;
+          else
+            password = value;
+        },
         decoration: InputDecoration(
           fillColor: Constants.COLORS['soft_blue'],
           filled: true,
@@ -53,6 +74,7 @@ class _CustomLoginContentState extends State<CustomLoginContent> {
             ),
           ),
           Form(
+            key: formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -63,7 +85,7 @@ class _CustomLoginContentState extends State<CustomLoginContent> {
                     color: Constants.COLORS['soft_gray'],
                   ),
                 ),
-                _inputDecoration(Constants.EMAIL_HINT),
+                _inputField(Constants.EMAIL_HINT, true),
                 SizedBox(height: 40.0),
                 Text(
                   'Password',
@@ -71,10 +93,23 @@ class _CustomLoginContentState extends State<CustomLoginContent> {
                     color: Constants.COLORS['soft_gray'],
                   ),
                 ),
-                _inputDecoration(Constants.PASSWORD_HINT),
+                _inputField(Constants.PASSWORD_HINT, false),
                 SizedBox(height: 40.0),
                 LoginButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    if (formKey.currentState.validate()) {
+                      formKey.currentState.save();
+                      Map<String, dynamic> result = await context
+                          .read<LoginState>()
+                          .logInEmail(email, password);
+                      if (result['error']) {
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text(result['message']),
+                        ));
+                      } else
+                        Navigator.of(context).pop();
+                    }
+                  },
                   type: 'signin',
                 ),
                 SizedBox(height: 40.0),
